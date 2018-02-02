@@ -29,9 +29,8 @@ public class ListVideoGameMarkServlet extends HttpServlet {
 		redirect(request,response);
 	}
 	
-	
 	protected void redirect(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/VideoGameList.jsp");
 		dispatcher.forward(request,response);
-}
+	}
 }
