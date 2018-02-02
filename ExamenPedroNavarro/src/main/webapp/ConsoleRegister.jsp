@@ -4,17 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>CosoleRegister</title>
 </head>
 <body>
-	<form action="videogame" method="post">
-		<span>title:</span> 
-		<input type="text" name="title"/> <br/>
-		<span>recommendedAge:</span> 
-		<input type="text" name="recommendedAge"/><br/>
-		<span>launchDate:</span> 
-		<input type="date" name="launchDate"/><br/>
+<body>
+	<form action="console" method="post">
+		<span>name:</span> 
+		<input type="text" name="name"/> <br/>
+		<span>codCompany:</span> 
+		<input type="text" name="codCompany"/><br/>
 		<input type="submit"/>
 	</form>
+</body>
 </body>
 </html>

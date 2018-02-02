@@ -42,6 +42,6 @@ public class Company {
 	
 	@Override
 	public String toString() {
-		return "Empresa [Nombre=" + name + ", fechaCreacion=" + date + "]";
+		return "Company [Name=" + name + ", Date=" + date + "]";
 	}
 }

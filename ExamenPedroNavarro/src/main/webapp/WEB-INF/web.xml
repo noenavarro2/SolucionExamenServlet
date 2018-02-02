@@ -3,11 +3,10 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee ;http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
-	<display-name>Archetype Created Web Application</display-name>
 
 	<servlet>
 		<servlet-name>ConsoleServlet</servlet-name>
-		<servlet-class>es.Salesianos.servlet.ListConsolasServlet</servlet-class>
+		<servlet-class>es.Salesianos.servlet.ListConsolesServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -17,7 +16,7 @@
 
 	<servlet>
 		<servlet-name>VideoGamesServlet</servlet-name>
-		<servlet-class>es.Salesianos.servlet.ListVideoJuegosServlet</servlet-class>
+		<servlet-class>es.Salesianos.servlet.ListVideoGamesServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -27,7 +26,7 @@
 
 	<servlet>
 		<servlet-name>VideoGameDataListServlet</servlet-name>
-		<servlet-class>es.Rafa.servlet.ListVideoJuegoMarcasServlet</servlet-class>
+		<servlet-class>es.Salesianos.servlet.ListVideoGamesMarkServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -37,7 +36,7 @@
 	
 	<servlet>
 		<servlet-name>ConsoleDataListServlet</servlet-name>
-		<servlet-class>es.Rafa.servlet.ListConsolasMarcasServlet</servlet-class>
+		<servlet-class>es.Salesianos.servlet.ListConsolesMarkServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -45,7 +44,7 @@
 		<url-pattern>dataConsoles</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
-		<welcome-file>AltaConsola.jsp</welcome-file>
+		<welcome-file>ConsoleRegister.jsp</welcome-file>
 	</welcome-file-list>
 
 

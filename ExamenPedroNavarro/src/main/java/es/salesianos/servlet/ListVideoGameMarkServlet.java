@@ -17,21 +17,21 @@ import es.salesianos.service.VideoGameService;
 import es.salesianos.model.Console;
 import es.salesianos.model.VideoGame;
 
-public class ListVideoJuegoMarcasServlet extends HttpServlet {
+public class ListVideoGameMarkServlet extends HttpServlet {
 
 	private VideoGameService service = new VideoGameService();
 	private static final long serialVersionUID = 1L;
 
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<VideoGame> listAllVideoGames = service.listAllVideoGames();
-		req.setAttribute("listAllVideoGames", listAllVideoGames);
-		redirect(req,resp);
+		request.setAttribute("listAllVideoGames", listAllVideoGames);
+		redirect(request,response);
 	}
 	
 	
-	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	protected void redirect(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/VideoGameList.jsp");
-		dispatcher.forward(req,resp);
+		dispatcher.forward(request,response);
 }
 }

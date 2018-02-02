@@ -12,17 +12,17 @@ import es.salesianos.model.VideoGame;
 
 public class VideoGamesRepository {
 
-	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/createVideojuegos.sql'";
+	private static final String JDBCURL = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/createVideoGames.sql'";
 	ConnectionH2 manager = new ConnectionH2();
 
 	public List<VideoGame> searchAll() {
 		List<VideoGame> listVideoGames = new ArrayList<VideoGame>();
-		Connection conn = null;
+		Connection connection = null;
 		ResultSet resultSet = null;
 		PreparedStatement prepareStatement = null;
 		try {
-			conn = manager.open(jdbcUrl);
-			prepareStatement = conn.prepareStatement("SELECT * FROM videoGames");
+			connection = manager.open(JDBCURL);
+			prepareStatement = connection.prepareStatement("SELECT * FROM videoGames");
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				VideoGame videoGameInDatabase = new VideoGame();
@@ -37,20 +37,20 @@ public class VideoGamesRepository {
 		} finally {
 			manager.close(resultSet);
 			manager.close(prepareStatement);
+			manager.close(connection);
 		}
-		manager.close(conn);
 		return listVideoGames;
 	}
 
-	public VideoGame search(VideoGame videojuegoFormulario) {
+	public VideoGame search(VideoGame videoGameForm) {
 		VideoGame videoGameInDatabase = null;
 		ResultSet resultSet = null;
 		PreparedStatement prepareStatement = null;
-		Connection conn = null;
+		Connection connection = null;
 		try {
-			conn = manager.open(jdbcUrl);
-			prepareStatement = conn.prepareStatement("SELECT * FROM videoGames WHERE title = ?");
-			prepareStatement.setString(1, videojuegoFormulario.getTitle());
+			connection = manager.open(JDBCURL);
+			prepareStatement = connection.prepareStatement("SELECT * FROM videoGames WHERE title = ?");
+			prepareStatement.setString(1, videoGameForm.getTitle());
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				videoGameInDatabase = new VideoGame();
@@ -64,50 +64,50 @@ public class VideoGamesRepository {
 		} finally {
 			manager.close(resultSet);
 			manager.close(prepareStatement);
+			manager.close(connection);
 		}
-		manager.close(conn);
 		return videoGameInDatabase;
 	}
 
-	public void insert(VideoGame videojuegoFormulario) {
-		Connection conn = null;
+	public void insert(VideoGame videoGameForm) {
+		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			conn = manager.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement(
+			connection = manager.open(JDBCURL);
+			preparedStatement = connection.prepareStatement(
 					"INSERT INTO videoGames (title,recommendedAge,launchDate)" + "VALUES (?, ?, ?)");
-			preparedStatement.setString(1, videojuegoFormulario.getTitle());
-			preparedStatement.setString(2, videojuegoFormulario.getRecommendedAge());
-			preparedStatement.setDate(3, new java.sql.Date(videojuegoFormulario.getLaunchDate().getTime()));
+			preparedStatement.setString(1, videoGameForm.getTitle());
+			preparedStatement.setString(2, videoGameForm.getRecommendedAge());
+			preparedStatement.setDate(3, new java.sql.Date(videoGameForm.getLaunchDate().getTime()));
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
 			manager.close(preparedStatement);
+			manager.close(connection);
 		}
-		manager.close(conn);
 	}
 
-	public void delete(VideoGame videojuegoFormulario) {
+	public void delete(VideoGame videoGameForm) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			conn = manager.open(jdbcUrl);
+			conn = manager.open(JDBCURL);
 			preparedStatement = conn.prepareStatement("DELETE * FROM videoGames WHERE title = ?");
-			preparedStatement.setString(1, videojuegoFormulario.getTitle());
+			preparedStatement.setString(1, videoGameForm.getTitle());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
 			manager.close(preparedStatement);
+			manager.close(conn);
 		}
-		manager.close(conn);
 	}
 
-	public void update(VideoGame formVideoGame) {
-		Connection conn = manager.open(jdbcUrl);
-		manager.close(conn);
+	public void update(VideoGame videoGameForm) {
+		Connection connection = manager.open(JDBCURL);
+		manager.close(connection);
 	}
 }

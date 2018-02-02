@@ -4,6 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface Service {
 
-	public void createObjectFromRequest(HttpServletRequest req);
+	public void createObjectFromRequest(HttpServletRequest request);
 
 }

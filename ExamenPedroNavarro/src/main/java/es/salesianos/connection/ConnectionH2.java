@@ -1,7 +1,6 @@
 package es.salesianos.connection;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,9 +22,9 @@ public class ConnectionH2 implements ConnectionManager {
 	}
 	
 	@Override
-	public void close(Connection conn) {
+	public void close(Connection connection) {
 		try {
-			conn.close();
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

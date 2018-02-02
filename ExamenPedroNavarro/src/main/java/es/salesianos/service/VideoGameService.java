@@ -14,29 +14,28 @@ public class VideoGameService implements Service{
 	private VideoGamesRepository repository = new VideoGamesRepository();
 
 	@Override
-	public void createObjectFromRequest(HttpServletRequest req) {
-		throw new RuntimeException("Esta petando");		
+	public void createObjectFromRequest(HttpServletRequest request) {
 	}
 	
-	public VideoGame assembleVideojuegoFromRequest(HttpServletRequest req) {
-		return VideoGameAssembler.assembleObjectFrom(req);
+	public VideoGame assembleVideojuegoFromRequest(HttpServletRequest request) {
+		return VideoGameAssembler.assembleObjectFrom(request);
 	}
 
-	public void insertOrUpdate(VideoGame videojuegoFormulario) {
-		VideoGame videojuegoInDatabase = repository.search(videojuegoFormulario);
-		if(null == videojuegoInDatabase){
-			repository.insert(videojuegoFormulario);
+	public void insertOrUpdate(VideoGame videoGameForm) {
+		VideoGame videoGameInDatabase = repository.search(videoGameForm);
+		if(null == videoGameInDatabase){
+			repository.insert(videoGameForm);
 		}else{
-			repository.update(videojuegoFormulario);
+			repository.update(videoGameForm);
 		}
 	}
 	
-	public VideoGame findVideoGame(VideoGame videojuegoFormulario) {
-		return repository.search(videojuegoFormulario);
+	public VideoGame findVideoGame(VideoGame videoGameForm) {
+		return repository.search(videoGameForm);
 	}
 	
-	public void delete(VideoGame videojuegoFormulario) {
-		repository.delete(videojuegoFormulario);
+	public void delete(VideoGame videoGameForm) {
+		repository.delete(videoGameForm);
 	}
 	
 	public List<VideoGame> listAllVideoGames() {

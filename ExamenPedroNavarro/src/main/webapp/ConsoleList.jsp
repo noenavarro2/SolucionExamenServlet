@@ -35,7 +35,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<input type="submit" value="Cargar tabla">
+		<input type="submit" value="Submit Table">
 	</form>
 
 </body>

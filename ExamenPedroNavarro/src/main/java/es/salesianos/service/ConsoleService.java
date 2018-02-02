@@ -9,26 +9,25 @@ import es.salesianos.model.Console;
 import es.salesianos.model.Company;
 import es.salesianos.model.VideoGame;
 import es.salesianos.repository.ConsolesRepository;
-import es.salesianos.repository.CompaniesRepository;
+import es.salesianos.repository.CompanysRepository;
 
 public class ConsoleService implements Service{
 	
 	private ConsolesRepository repository = new ConsolesRepository();
 
-	public void createObjectFromRequest(HttpServletRequest req) {
-		throw new RuntimeException("Error");		
+	public void createObjectFromRequest(HttpServletRequest request) {	
 	}
 	
-	public Console assembleConsolaFromRequest(HttpServletRequest req) {
-		return ConsoleAssembler.assembleObjectFrom(req);
+	public Console assembleConsoleFromRequest(HttpServletRequest request) {
+		return ConsoleAssembler.assembleObjectFrom(request);
 	}
 	
-	public void insertOrUpdate(Console consolaFormulario) {
-		Console consolaInDatabase = repository.search(consolaFormulario);
-		if(null == consolaInDatabase){
-			repository.insert(consolaFormulario);
+	public void insertOrUpdate(Console consoleForm) {
+		Console consoleInDatabase = repository.search(consoleForm);
+		if(null == consoleInDatabase){
+			repository.insert(consoleForm);
 		}else{
-			repository.update(consolaFormulario);
+			repository.update(consoleForm);
 		}
 	}
 	public Console findConsole(Console formConsole) {
@@ -43,15 +42,4 @@ public class ConsoleService implements Service{
 		return repository.searchAll();
 	}
 	
-	/*public void insertOrUpdate(String consolaFormulario) {
-		Empresa empresa = repository1.myEmpresa(consolaFormulario);
-		Consola consolaInDatabase = repository
-		Consola consolaInDatabase = repository.search(consolaFormulario);
-		if(null == consolaInDatabase){
-			repository.insert(consolaFormulario);
-		}else{
-			repository.update(consolaFormulario);
-		}
-	}*/
-
 }

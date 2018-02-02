@@ -3,20 +3,18 @@ package es.salesianos.assembler;
 import javax.servlet.http.HttpServletRequest;
 import es.salesianos.model.Company;
 import es.salesianos.model.Console;
-import es.salesianos.repository.CompaniesRepository;
+import es.salesianos.repository.CompanysRepository;
 
 public class ConsoleAssembler {
+	static CompanysRepository repository = new CompanysRepository();
 
-	
-	public static Console assembleObjectFrom(HttpServletRequest req) {
-		CompaniesRepository repo = new CompaniesRepository();
+	public static Console assembleObjectFrom(HttpServletRequest request) {
 		Console console = new Console();
-		String name = req.getParameter("name");
-		String companyName = req.getParameter("company");
+		String name = request.getParameter("name");
+		String companyName = request.getParameter("company");
 		console.setName(name);
-		Company primaryCompany = repo.myEmpresa(companyName);
+		Company primaryCompany = repository.myCompany(companyName);
 		console.setCompany(primaryCompany);
 		return console;
 	}
-
 }
