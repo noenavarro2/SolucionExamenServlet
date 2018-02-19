@@ -11,6 +11,7 @@ public class VideoGame {
 	private String recommendedAge;
 	private Date launchDate;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	private String console;
 	
 	public String getTitle() {
 		return title;
@@ -49,6 +50,15 @@ public class VideoGame {
 			throw new RuntimeException(e);
 		}
 	}
+
+	public String getConsole() {
+		return console;
+	}
+
+	public void setConsole(String string) {
+		this.console = string;
+	}
+	
 		
 }
 

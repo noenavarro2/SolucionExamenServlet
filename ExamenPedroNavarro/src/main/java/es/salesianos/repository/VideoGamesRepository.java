@@ -1,113 +1,144 @@
 package es.salesianos.repository;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.salesianos.connection.ConnectionH2;
+import es.salesianos.model.Console;
 import es.salesianos.model.VideoGame;
 
-public class VideoGamesRepository {
 
-	private static final String JDBCURL = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/createVideoGames.sql'";
-	ConnectionH2 manager = new ConnectionH2();
+public class VideoGamesRepository implements Repository<VideoGame> {
 
-	public List<VideoGame> searchAll() {
-		List<VideoGame> listVideoGames = new ArrayList<VideoGame>();
-		Connection connection = null;
-		ResultSet resultSet = null;
-		PreparedStatement prepareStatement = null;
-		try {
-			connection = manager.open(JDBCURL);
-			prepareStatement = connection.prepareStatement("SELECT * FROM videoGames");
-			resultSet = prepareStatement.executeQuery();
-			while (resultSet.next()) {
-				VideoGame videoGameInDatabase = new VideoGame();
-				videoGameInDatabase.setTitle(resultSet.getString(1));
-				videoGameInDatabase.setRecommendedAge(resultSet.getString(2));
-				videoGameInDatabase.setLaunchDate(resultSet.getString(3));
-				listVideoGames.add(videoGameInDatabase);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			manager.close(resultSet);
-			manager.close(prepareStatement);
-			manager.close(connection);
-		}
-		return listVideoGames;
-	}
-
-	public VideoGame search(VideoGame videoGameForm) {
-		VideoGame videoGameInDatabase = null;
-		ResultSet resultSet = null;
-		PreparedStatement prepareStatement = null;
-		Connection connection = null;
-		try {
-			connection = manager.open(JDBCURL);
-			prepareStatement = connection.prepareStatement("SELECT * FROM videoGames WHERE title = ?");
-			prepareStatement.setString(1, videoGameForm.getTitle());
-			resultSet = prepareStatement.executeQuery();
-			while (resultSet.next()) {
-				videoGameInDatabase = new VideoGame();
-				videoGameInDatabase.setTitle(resultSet.getString(0));
-				videoGameInDatabase.setRecommendedAge(resultSet.getString(1));
-				videoGameInDatabase.setLaunchDate(resultSet.getDate(2));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			manager.close(resultSet);
-			manager.close(prepareStatement);
-			manager.close(connection);
-		}
-		return videoGameInDatabase;
-	}
-
-	public void insert(VideoGame videoGameForm) {
-		Connection connection = null;
+	@Override
+	public void insert(VideoGame videogame) {
+		Connection conn = connection.openConnection(JDBCURL);
 		PreparedStatement preparedStatement = null;
 		try {
-			connection = manager.open(JDBCURL);
-			preparedStatement = connection.prepareStatement(
-					"INSERT INTO videoGames (title,recommendedAge,launchDate)" + "VALUES (?, ?, ?)");
-			preparedStatement.setString(1, videoGameForm.getTitle());
-			preparedStatement.setString(2, videoGameForm.getRecommendedAge());
-			preparedStatement.setDate(3, new java.sql.Date(videoGameForm.getLaunchDate().getTime()));
+			preparedStatement = conn.prepareStatement("INSERT INTO Videogame (name,recomendedAge,releaseDate,consoleId)" + "VALUES (?, ?, ?, ?)");
+			preparedStatement.setString(1, videogame.getTitle());
+			preparedStatement.setString(2, videogame.getRecommendedAge());
+			preparedStatement.setDate(3, (Date) videogame.getLaunchDate());
+			preparedStatement.setString(4, videogame.getConsole());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			manager.close(preparedStatement);
-			manager.close(connection);
+			connection.closePreparedStatement(preparedStatement);
+			connection.closeConnection(conn);
 		}
 	}
 
-	public void delete(VideoGame videoGameForm) {
+	@Override
+	public void delete(VideoGame videogame) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		try {
-			conn = manager.open(JDBCURL);
-			preparedStatement = conn.prepareStatement("DELETE * FROM videoGames WHERE title = ?");
-			preparedStatement.setString(1, videoGameForm.getTitle());
+			conn = connection.openConnection(JDBCURL);
+			preparedStatement = conn.prepareStatement("DELETE FROM Videogame WHERE id = ?");
+			preparedStatement.setString(1, videogame.getTitle());
 			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException(e);
 		} finally {
-			manager.close(preparedStatement);
-			manager.close(conn);
+			connection.closePreparedStatement(preparedStatement);
+			connection.closeConnection(conn);
 		}
 	}
 
-	public void update(VideoGame videoGameForm) {
-		Connection connection = manager.open(JDBCURL);
-		manager.close(connection);
+	@Override
+	public List<VideoGame> listAll() {
+		List<VideoGame> videogames = new ArrayList<VideoGame>();
+		Connection conn = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			conn = connection.openConnection(JDBCURL);
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM Videogame");
+			while (resultSet.next()) {
+				VideoGame videogame = new VideoGame();
+				videogame.setTitle(resultSet.getString("title"));
+				videogame.setRecommendedAge(resultSet.getString("recommendedAge"));
+				videogame.setLaunchDate(resultSet.getDate("launchDate"));
+				videogame.setConsole(resultSet.getString("console"));
+				videogames.add(videogame);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			connection.closeResultSet(resultSet);
+			connection.closeStatement(statement);
+			connection.closeConnection(conn);
+		}
+		return videogames;
 	}
+	
+	public List<VideoGame> searchByConsole(Console console){
+	    List<VideoGame> listVideogames = new ArrayList<VideoGame>();
+	    Connection conn = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+	    PreparedStatement prepareStatement = null;
+	    try {
+	    	conn = connection.openConnection(JDBCURL);
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery("SELECT + WHERE name = ?");
+			prepareStatement.setString(1, console.getName());
+			resultSet = prepareStatement.executeQuery();
+			while(resultSet.next()){
+		        VideoGame VideogameInDatabase = new VideoGame();
+		        VideogameInDatabase.setTitle(resultSet.getString(1));
+		        VideogameInDatabase.setRecommendedAge(resultSet.getString(2));
+		        VideogameInDatabase.setLaunchDate(resultSet.getString(3));
+		        VideogameInDatabase.setConsole(resultSet.getString(4));
+		        listVideogames.add(VideogameInDatabase);
+	      }
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	      throw new RuntimeException(e);
+	    }finally {
+	    	connection.closeResultSet(resultSet);
+			connection.closeStatement(statement);
+			connection.closeConnection(conn);
+	    }
+	    return listVideogames;
+	}
+	
+	public List<VideoGame> searchByRecommendedAge(String recommendedAge){
+	    List<VideoGame> listVideogames = new ArrayList<VideoGame>();
+	    Connection conn = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+	    PreparedStatement prepareStatement = null;
+	    try {
+	    	conn = connection.openConnection(JDBCURL);
+			statement = conn.createStatement();
+		    prepareStatement = conn.prepareStatement(recommendedAge);
+		    resultSet = prepareStatement.executeQuery();
+		    while(resultSet.next()){
+		        VideoGame videogameInDatabase = new VideoGame();
+		        videogameInDatabase.setTitle(resultSet.getString(1));
+		        videogameInDatabase.setRecommendedAge(resultSet.getString(2));
+		        videogameInDatabase.setLaunchDate(resultSet.getString(3));
+		        videogameInDatabase.setConsole(resultSet.getString(4));
+		        listVideogames.add(videogameInDatabase);
+	      }
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	      throw new RuntimeException(e);
+	    }finally {
+	    	connection.closeResultSet(resultSet);
+			connection.closeStatement(statement);
+			connection.closeConnection(conn);
+	    }
+	    return listVideogames;
+	  }
 }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,87 +13,72 @@ import es.salesianos.connection.ConnectionH2;
 import es.salesianos.connection.ConnectionManager;
 import es.salesianos.model.Company;
 
-public class CompanysRepository {
-	
-	private static final String JDBCURL = "jdbc:h2:file:./src/main/resources/test";
-	ConnectionManager manager = new ConnectionH2();
+public class CompanysRepository implements Repository<Company>{
 
-	public Company search(Company companyForm) {
-		Company companyInDatabase= null;
-		ResultSet resultSet = null;
-		PreparedStatement prepareStatement = null;
-		Connection connection = manager.open(JDBCURL);
+	@Override
+	public void insert(Company company) {
+		Connection conn = connection.openConnection(JDBCURL);
+		PreparedStatement preparedStatement = null;
 		try {
-			prepareStatement = connection.prepareStatement("SELECT * FROM companys WHERE name = ?");
-			prepareStatement.setString(1, companyForm.getName());
-			resultSet = prepareStatement.executeQuery();
-			while(resultSet.next()){
-				companyInDatabase = new Company();
-				companyInDatabase.setName(resultSet.getString(0));
-				companyInDatabase.setDate(resultSet.getString(1));
-			}
+			preparedStatement = conn.prepareStatement("INSERT INTO Company (name,date)" + "VALUES (?, ?)");
+			preparedStatement.setString(1, company.getName());
+			preparedStatement.setDate(2, (java.sql.Date) company.getDate());
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
-		}finally {
-			manager.close(resultSet);
-			manager.close(prepareStatement);
-			manager.close(connection);
+		} finally {
+			connection.closePreparedStatement(preparedStatement);
+			connection.closeConnection(conn);
 		}
-		return companyInDatabase;
 	}
+
+	@Override
+	public void delete(Company company) {
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			conn = connection.openConnection(JDBCURL);
+			preparedStatement = conn.prepareStatement("DELETE FROM Company WHERE id = ?");
+			preparedStatement.setString(1, company.getName());
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			connection.closePreparedStatement(preparedStatement);
+			connection.closeConnection(conn);
+		}
+	}
+
+	@Override
+	public List<Company> listAll() {
+		List<Company> companies = new ArrayList<Company>();
+		Connection conn = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			conn = connection.openConnection(JDBCURL);
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM Company");
+			while (resultSet.next()) {
+				Company comp = new Company();
+				comp.setName(resultSet.getString("name"));
+				comp.setDate(resultSet.getDate("date"));
+				companies.add(comp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			connection.closeResultSet(resultSet);
+			connection.closeStatement(statement);
+			connection.closeConnection(conn);
+		}
+		return companies;
+	}
+
 	
-	public List<Company> listAllCompanys() {
-		List<Company> listCompanys= null;
-		Connection connection = null;
-		ResultSet resultSet = null;
-		PreparedStatement prepareStatement = null;
-		try {
-			listCompanys= new ArrayList<Company>();
-			connection = manager.open(JDBCURL);
-			prepareStatement = connection.prepareStatement("SELECT * FROM companys");
-			resultSet = prepareStatement.executeQuery();
-			while(resultSet.next()){
-				Company companyInDatabase = new Company();
-				companyInDatabase.setName(resultSet.getString(1));
-				companyInDatabase.setDate(resultSet.getString(2));
-				listCompanys.add(companyInDatabase);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}finally {
-			manager.close(resultSet);
-			manager.close(prepareStatement);
-			manager.close(connection);
-		}
-		return listCompanys;
-	}
 	
-	public Company myCompany(String companyName) {
-		Company company = null;
-		ResultSet resultSet = null;
-		PreparedStatement prepareStatement = null;
-		Connection connection = null;
-		try {
-			connection = manager.open(JDBCURL);
-			prepareStatement = connection.prepareStatement("SELECT * FROM companys WHERE name = ?");
-			prepareStatement.setString(1, companyName);
-			resultSet = prepareStatement.executeQuery();
-			while(resultSet.next()){
-				company = new Company();
-				company.setName(resultSet.getString(1));
-				company.setDate(resultSet.getString(2));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}finally {
-			manager.close(resultSet);
-			manager.close(prepareStatement);
-			manager.close(connection);
-		}
-		return company;
-	}
 
 }
+

@@ -5,14 +5,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ConnectionH2 implements ConnectionManager {
 	
+	public static final String DRIVER = "org.h2.Driver";
 	@Override
-	public Connection open(String jdbcUrl) {
+	public Connection openConnection(String jdbcUrl) {
 		Connection conn = null;
 		try {
-			Class.forName("org.h2.Driver");
+			Class.forName(DRIVER);
 			conn = DriverManager.getConnection(jdbcUrl, "sa", "");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -20,34 +22,48 @@ public class ConnectionH2 implements ConnectionManager {
 		}
 		return conn;
 	}
-	
+
 	@Override
-	public void close(Connection connection) {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
+	public void closeConnection(Connection connection) {
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
+
 	@Override
-	public void close(PreparedStatement prepareStatement) {
-		try {
-			prepareStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
+	public void closeStatement(Statement statement) {
+		if (statement != null) {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
+
 	@Override
-	public void close(ResultSet resultSet) {
-		try {
-			resultSet.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
+	public void closePreparedStatement(PreparedStatement preparedStatement) {
+		if (preparedStatement != null) {
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+	}
+
+	@Override
+	public void closeResultSet(ResultSet resultSet) {
+		if (resultSet != null) {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}	
 	}
 }

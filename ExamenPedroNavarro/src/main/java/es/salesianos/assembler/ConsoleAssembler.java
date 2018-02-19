@@ -6,15 +6,11 @@ import es.salesianos.model.Console;
 import es.salesianos.repository.CompanysRepository;
 
 public class ConsoleAssembler {
-	static CompanysRepository repository = new CompanysRepository();
 
 	public static Console assembleObjectFrom(HttpServletRequest request) {
 		Console console = new Console();
-		String name = request.getParameter("name");
-		String companyName = request.getParameter("company");
-		console.setName(name);
-		Company primaryCompany = repository.myCompany(companyName);
-		console.setCompany(primaryCompany);
+		console.setName(request.getParameter("name"));
+		console.setCompany(request.getParameter("company"));
 		return console;
 	}
 }

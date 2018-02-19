@@ -17,7 +17,7 @@ public class ListConsolesMarkServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Console> listAllConsoles = service.listAllConsoles();
+		List<Console> listAllConsoles = service.listAll();
 		request.setAttribute("listAllConsoles", listAllConsoles);
 		redirect(request,response);
 	}

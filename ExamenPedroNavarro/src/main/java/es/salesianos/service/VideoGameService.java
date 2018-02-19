@@ -1,48 +1,44 @@
 package es.salesianos.service;
 
 import java.util.List;
-
-
 import javax.servlet.http.HttpServletRequest;
-
 import es.salesianos.assembler.VideoGameAssembler;
+import es.salesianos.model.Console;
 import es.salesianos.model.VideoGame;
 import es.salesianos.repository.VideoGamesRepository;
 
-public class VideoGameService implements Service{
+
+public class VideogameService implements Service<VideoGame> {
 	
 	private VideoGamesRepository repository = new VideoGamesRepository();
 
 	@Override
-	public void createObjectFromRequest(HttpServletRequest request) {
-	}
-	
-	public VideoGame assembleVideojuegoFromRequest(HttpServletRequest request) {
-		return VideoGameAssembler.assembleObjectFrom(request);
+	public VideoGame createObjectFromRequest(HttpServletRequest request) {
+		VideoGame videogame = VideoGameAssembler.assembleObjectFrom(request);
+		return videogame;
 	}
 
-	public void insertOrUpdate(VideoGame videoGameForm) {
-		VideoGame videoGameInDatabase = repository.search(videoGameForm);
-		if(null == videoGameInDatabase){
-			repository.insert(videoGameForm);
-		}else{
-			repository.update(videoGameForm);
-		}
-	}
-	
-	public VideoGame findVideoGame(VideoGame videoGameForm) {
-		return repository.search(videoGameForm);
-	}
-	
-	public void delete(VideoGame videoGameForm) {
-		repository.delete(videoGameForm);
-	}
-	
-	public List<VideoGame> listAllVideoGames() {
-		return repository.searchAll();
+	@Override
+	public void insert(VideoGame videogame) {
+		repository.insert(videogame);
 	}
 
+	@Override
+	public void delete(VideoGame videogame) {
+		repository.delete(videogame);
+	}
+
+	@Override
+	public List<VideoGame> listAll() {
+		return repository.listAll();
+	}
 	
-
-
+	public List<VideoGame> listByRecommendedAge(String recommendedAge) {
+			return repository.searchByRecommendedAge(recommendedAge);
+	}
+		
+	public List<VideoGame> listByConsole(Console console) {
+			return repository.searchByConsole(console);
+	}
+	
 }

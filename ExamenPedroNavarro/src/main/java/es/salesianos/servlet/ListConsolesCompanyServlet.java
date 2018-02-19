@@ -2,6 +2,7 @@ package es.salesianos.servlet;
 
 import java.io.IOException;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,21 +12,19 @@ import es.salesianos.model.Console;
 import es.salesianos.service.ConsoleService;
 
 
-public class ListConsolesServlet extends HttpServlet {
-
-private static final long serialVersionUID = 1L;
+public class ListConsolesCompanyServlet extends HttpServlet {
 	
 	private ConsoleService service = new ConsoleService();
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-		List<Console> listAllConsoles = service.listAll();
+		List<Console> listAllConsoles = service.listAllByCompany();
 		request.setAttribute("listAllConsoles", listAllConsoles);
 		redirect(request,resp);
 	}
 	
 	protected void redirect(HttpServletRequest request, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listConsole.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listConsolesCompany.jsp");
 		dispatcher.forward(request,resp);
 	}
 	
@@ -36,4 +35,5 @@ private static final long serialVersionUID = 1L;
 	public void setService(ConsoleService service) {
 		this.service = service;
 	}
+
 }

@@ -4,42 +4,40 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import es.salesianos.assembler.ConsoleAssembler;
-import es.salesianos.model.Console;
-import es.salesianos.model.Company;
-import es.salesianos.model.VideoGame;
-import es.salesianos.repository.ConsolesRepository;
-import es.salesianos.repository.CompanysRepository;
+import org.h2.engine.Setting;
 
-public class ConsoleService implements Service{
-	
+import es.salesianos.assembler.*;
+import es.salesianos.model.*;
+import es.salesianos.repository.*;
+
+public class ConsoleService implements Service<Console> {
+
 	private ConsolesRepository repository = new ConsolesRepository();
 
-	public void createObjectFromRequest(HttpServletRequest request) {	
+	@Override
+	public Console createObjectFromRequest(HttpServletRequest request) {
+		Console console = ConsoleAssembler.assembleObjectFrom(request);
+		return console;
+	}
+
+	@Override
+	public void insert(Console console) {
+		repository.insert(console);
+		
+	}
+
+	@Override
+	public void delete(Console console) {
+		repository.delete(console);
+		
+	}
+
+	@Override
+	public List<Console> listAll() {
+		return repository.listAll();
 	}
 	
-	public Console assembleConsoleFromRequest(HttpServletRequest request) {
-		return ConsoleAssembler.assembleObjectFrom(request);
+	public List<Console> listAllByCompany(){
+		return repository.listAllByCompany();
 	}
-	
-	public void insertOrUpdate(Console consoleForm) {
-		Console consoleInDatabase = repository.search(consoleForm);
-		if(null == consoleInDatabase){
-			repository.insert(consoleForm);
-		}else{
-			repository.update(consoleForm);
-		}
-	}
-	public Console findConsole(Console formConsole) {
-		return repository.search(formConsole);
-	}
-	
-	public void delete(Console formConsole) {
-		repository.delete(formConsole);
-	}
-	
-	public List<Console> listAllConsoles() {
-		return repository.searchAll();
-	}
-	
 }
