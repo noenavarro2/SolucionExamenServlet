@@ -20,7 +20,7 @@ public class VideoGamesRepository implements Repository<VideoGame> {
 		Connection conn = connection.openConnection(JDBCURL);
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = conn.prepareStatement("INSERT INTO Videogame (name,recomendedAge,releaseDate,consoleId)" + "VALUES (?, ?, ?, ?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO Videogame (name,recomendedAge,launchDate,console)" + "VALUES (?, ?, ?, ?)");
 			preparedStatement.setString(1, videogame.getTitle());
 			preparedStatement.setString(2, videogame.getRecommendedAge());
 			preparedStatement.setDate(3, (Date) videogame.getLaunchDate());
@@ -41,7 +41,7 @@ public class VideoGamesRepository implements Repository<VideoGame> {
 		PreparedStatement preparedStatement = null;
 		try {
 			conn = connection.openConnection(JDBCURL);
-			preparedStatement = conn.prepareStatement("DELETE FROM Videogame WHERE id = ?");
+			preparedStatement = conn.prepareStatement("DELETE FROM Videogame WHERE title = ?");
 			preparedStatement.setString(1, videogame.getTitle());
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
