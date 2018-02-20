@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import es.salesianos.model.VideoGame;
 import es.salesianos.service.VideogameService;
 
+
 public class ListVideoGamesServlet extends HttpServlet {
 
 

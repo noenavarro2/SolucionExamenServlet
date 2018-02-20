@@ -1,16 +1,11 @@
 package es.salesianos.model;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class VideoGame {
 
 	private String title;
 	private String recommendedAge;
-	private Date launchDate;
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	private String launchDate;
 	private String console;
 	
 	public String getTitle() {
@@ -30,25 +25,12 @@ public class VideoGame {
 		this.recommendedAge = recommendedAge;
 	}
 	
-	public Date getLaunchDate() {
+	public String getLaunchDate() {
 		return launchDate;
 	}
 	
-	public String LaunchDateToString() {
-		DateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-		return formatoFecha.format(this.launchDate);
-	}
-	
-	public void setLaunchDate(Date launchDate) {
-		this.launchDate = launchDate;
-	}
-	
-	public void setLaunchDate(String launchDate) {
-		try {
-			this.launchDate = sdf.parse(launchDate);
-		} catch (ParseException e) {
-			throw new RuntimeException(e);
-		}
+	public void setLaunchDate(String launchDate2) {
+		this.launchDate = launchDate2;
 	}
 
 	public String getConsole() {

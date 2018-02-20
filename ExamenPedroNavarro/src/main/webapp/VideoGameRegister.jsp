@@ -13,7 +13,7 @@
 		<span>recommendedAge:</span> 
 		<input type="text" name="recommendedAge"/><br/>
 		<span>launchDate:</span> 
-		<input type="date" name="launchDate"/><br/>
+		<input type="text" name="launchDate"/><br/>
 		<input type="submit"/>
 	</form>
 </body>

@@ -22,14 +22,12 @@ public class ConsoleService implements Service<Console> {
 
 	@Override
 	public void insert(Console console) {
-		repository.insert(console);
-		
+		repository.insert(console);	
 	}
 
 	@Override
 	public void delete(Console console) {
 		repository.delete(console);
-		
 	}
 
 	@Override

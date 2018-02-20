@@ -25,7 +25,6 @@
 				<tr>
 					<td>Name</td>
 					<td>Company</td>
-					<td><input type=""></td>
 				</tr>
 			</thead>
 			<c:forEach items="${consoles}" var="consoles">
@@ -35,7 +34,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<input type="submit" value="Submit Table">
+		<input type="submit" value="Submit">
 	</form>
 
 </body>

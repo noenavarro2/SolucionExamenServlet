@@ -9,8 +9,8 @@ public class VideoGameAssembler {
 	
 	public static VideoGame assembleObjectFrom(HttpServletRequest request) {
 		String title = request.getParameter("title");
-		String launchDate = request.getParameter("recommendedAge");
-		String recommendedAge= request.getParameter("launchDate");
+		String launchDate = request.getParameter("launchDate");
+		String recommendedAge= request.getParameter("recommendedAge");
 		videoGame.setTitle(title);
 		videoGame.setRecommendedAge(recommendedAge);
 		videoGame.setLaunchDate(launchDate);

@@ -14,8 +14,8 @@
 	<h2>VIDEOGAMES</h2>
 
 	<%
-		List<VideoGame> videogames = (List<VideoGame>) request.getAttribute("listAllVideogames");
-		pageContext.setAttribute("videogames", videogames);
+		List<VideoGame> videoGames = (List<VideoGame>) request.getAttribute("listAllVideogames");
+		pageContext.setAttribute("videogames", videoGames);
 	%>
 	
 	<h4> List videogames: </h4>
@@ -27,25 +27,13 @@
 				<td>Release date</td>
 			</tr>
 		</thead>
-		<tbody>
-			<%
-				if (null != videogames && !videogames.isEmpty()) {
-					for (VideoGame videogame : videogames) {
-						out.println("<tr>");
-						out.println("<td>");
-						out.println(videogame.getTitle());
-						out.println("</td>");
-						out.println("<td>");
-						out.println(videogame.getRecommendedAge());
-						out.println("</td>");
-						out.println("<td>");
-						out.println(videogame.getLaunchDate());
-						out.println("</td>");
-						out.println("</tr>");
-					}
-				}
-			%>
-		</tbody>
+		<c:forEach items="${videoGames}" var="videoGames">
+				<tr>
+					<td><c:out value="${videoGames.title}" /></td>
+					<td><c:out value="${videoGames.recommendedAge}" /></td>
+					<td><c:out value="${videoGames.launchDate}" /></td>
+				</tr>
+			</c:forEach>
 	</table>
 </body>
 </html>
