@@ -39,7 +39,7 @@ public class CompanysRepository implements Repository<Company>{
 		PreparedStatement preparedStatement = null;
 		try {
 			conn = connection.openConnection(JDBCURL);
-			preparedStatement = conn.prepareStatement("DELETE FROM Company WHERE id = ?");
+			preparedStatement = conn.prepareStatement("DELETE FROM Company WHERE name = ?");
 			preparedStatement.setString(1, company.getName());
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
