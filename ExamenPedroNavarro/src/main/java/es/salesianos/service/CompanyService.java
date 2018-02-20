@@ -10,8 +10,11 @@ import es.salesianos.repository.*;
 
 public class CompanyService implements Service<Company> {
 	
-	private CompanysRepository repository = new CompanysRepository();
-
+	private CompanyRepository repository = new CompanyRepository();
+	
+	public void createNewCompanyFromRequest(Company company) {
+		repository.insert(company);
+}
 	@Override
 	public Company createObjectFromRequest(HttpServletRequest request) {
 		Company company = CompanyAssembler.assembleObjectFrom(request);
@@ -31,5 +34,13 @@ public class CompanyService implements Service<Company> {
 	@Override
 	public List<Company> listAll() {
 		return repository.listAll();
+	}
+	
+	public CompanyRepository getRepository() {
+		return repository;
+	}
+	
+	public void setRepository(CompanyRepository repository) {
+		this.repository = repository;
 	}
 }

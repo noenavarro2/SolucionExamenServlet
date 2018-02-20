@@ -6,7 +6,7 @@ public class VideoGame {
 	private String title;
 	private String recommendedAge;
 	private String launchDate;
-	private String console;
+	private int company;
 	
 	public String getTitle() {
 		return title;
@@ -29,16 +29,16 @@ public class VideoGame {
 		return launchDate;
 	}
 	
-	public void setLaunchDate(String launchDate2) {
-		this.launchDate = launchDate2;
+	public void setLaunchDate(String launchDate) {
+		this.launchDate = launchDate;
 	}
 
-	public String getConsole() {
-		return console;
+	public int getCompany() {
+		return company;
 	}
 
-	public void setConsole(String string) {
-		this.console = string;
+	public void setCompany(int company) {
+		this.company = company;
 	}
 	
 		

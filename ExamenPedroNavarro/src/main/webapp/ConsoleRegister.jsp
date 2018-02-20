@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ConsoleRegister</title>
+<title>Console Register</title>
 </head>
 <body>
 <body>
 	<form action="console" method="post">
 		<span>name:</span> 
 		<input type="text" name="name"/> <br/>
-		<span>codCompany:</span> 
+		<span>Company:</span> 
 		<input type="text" name="codCompany"/><br/>
 		<input type="submit"/>
 	</form>

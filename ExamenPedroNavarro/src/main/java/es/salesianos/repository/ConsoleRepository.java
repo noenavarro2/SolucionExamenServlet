@@ -11,10 +11,10 @@ import es.salesianos.connection.ConnectionH2;
 import es.salesianos.model.Console;
 import es.salesianos.model.Company;
 
-public class ConsolesRepository implements Repository<Console> {
-	
-	CompanysRepository repository = new CompanysRepository();
-	
+public class ConsoleRepository implements Repository<Console> {
+
+	CompanyRepository repository = new CompanyRepository();
+
 	@Override
 	public void insert(Console console) {
 		Connection conn = connection.openConnection(JDBCURL);
@@ -22,7 +22,7 @@ public class ConsolesRepository implements Repository<Console> {
 		try {
 			preparedStatement = conn.prepareStatement("INSERT INTO Console (name,company)" + "VALUES (?, ?)");
 			preparedStatement.setString(1, console.getName());
-			preparedStatement.setString(2, console.getCompany());
+			preparedStatement.setInt(2, console.getCompany());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -47,23 +47,24 @@ public class ConsolesRepository implements Repository<Console> {
 		} finally {
 			connection.closePreparedStatement(preparedStatement);
 			connection.closeConnection(conn);
-		}	
+		}
 	}
+
 	@Override
 	public List<Console> listAll() {
-		List<Console> consoles = new ArrayList<Console>();
+		List<Console> consolesList = new ArrayList<Console>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try {
 			conn = connection.openConnection(JDBCURL);
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM Console WHERE name = ?");
+			resultSet = statement.executeQuery("SELECT * FROM console");
 			while (resultSet.next()) {
 				Console console = new Console();
-				console.setName(resultSet.getString("name"));
-				console.setCompany(resultSet.getString("company"));
-				consoles.add(console);
+				console.setName(resultSet.getString(1));
+				console.setCompany(resultSet.getInt(2));
+				consolesList.add(console);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,24 +74,23 @@ public class ConsolesRepository implements Repository<Console> {
 			connection.closeStatement(statement);
 			connection.closeConnection(conn);
 		}
-		return consoles;
+		return consolesList;
 	}
 
-	
-	public List<Console> listAllByCompany() {
-		List<Console> consoles = new ArrayList<Console>();
+	public List<Console> listAllByCompany(int company) {
+		List<Console> consolesList = new ArrayList<Console>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 
 		try {
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM console order by name");
+			resultSet = statement.executeQuery("SELECT * FROM CONSOLE WHERE company = ?");
 			while (resultSet.next()) {
 				Console actualConsole = new Console();
-				actualConsole.setName(resultSet.getString("name"));
-				actualConsole.setCompany(resultSet.getString("company"));
-				consoles.add(actualConsole);
+				actualConsole.setName(resultSet.getString(1));
+				actualConsole.setCompany(resultSet.getInt(2));
+				consolesList.add(actualConsole);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -99,7 +99,7 @@ public class ConsolesRepository implements Repository<Console> {
 			connection.closeResultSet(resultSet);
 			connection.closeConnection(conn);
 		}
-		return consoles;
+		return consolesList;
 	}
-		
+
 }

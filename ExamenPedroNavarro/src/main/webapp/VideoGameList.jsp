@@ -11,11 +11,9 @@
 <title>VideoGames</title>
 </head>
 <body>
-	<%
-		List<VideoGame> videoGames = (List<VideoGame>) request.getAttribute("listAllVideoGames");
-		pageContext.setAttribute("videogames", videoGames);
-	%>
-
+	<form action="OrderByReleaseDate" method="post">
+		<input type="submit" value="order list by release date">
+	</form>
 	<form action="dataGames" method="post">
 		<table border="1">
 			<thead>
@@ -25,7 +23,7 @@
 					<td>launchDate</td>
 				</tr>
 			</thead>
-			<c:forEach items="${videoGames}" var="videogames">
+			<c:forEach var="videogames" items="${listAllVideoGame}">
 				<tr>
 					<td><c:out value="${videogames.title}" /></td>
 					<td><c:out value="${videogames.recommendedAge}" /></td>
@@ -35,6 +33,5 @@
 		</table>
 		<input type="submit" value="Submit table">
 	</form>
-
 </body>
 </html>

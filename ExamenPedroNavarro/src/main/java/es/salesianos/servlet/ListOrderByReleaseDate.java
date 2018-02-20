@@ -7,25 +7,24 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import es.salesianos.model.VideoGame;
+import es.salesianos.model.*;
 import es.salesianos.service.VideogameService;
 
-
-public class ListVideoGamesServlet extends HttpServlet {
-
+public class ListOrderByReleaseDate extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	private VideogameService service = new VideogameService();
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-		List<VideoGame> listAllVideogames = service.listAll();
-		request.setAttribute("listAllVideogames", listAllVideogames);
-		redirect(request,resp);
-	}
-	
-	protected void redirect(HttpServletRequest request, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/VideoGameList.jsp");
-		dispatcher.forward(request,resp);
-	}
 
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		List<VideoGame> listAllVideoGame = service.OrderLaunchDate();
+		req.getSession().setAttribute("listAllVideoGame", listAllVideoGame);
+		redirect(req,resp);
+	}
+	
+	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/VideoGameList.jsp");
+		dispatcher.forward(req,resp);
+	}
 }
+

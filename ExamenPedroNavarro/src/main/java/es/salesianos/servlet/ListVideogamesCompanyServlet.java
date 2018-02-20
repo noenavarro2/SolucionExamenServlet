@@ -12,29 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import es.salesianos.model.Company;
 import es.salesianos.model.VideoGame;
+import es.salesianos.service.CompanyService;
 import es.salesianos.service.VideogameService;
 
 public class ListVideogamesCompanyServlet extends HttpServlet {
 
-	private VideogameService service = new VideogameService();
-	
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<VideoGame> listAllVideogames = service.listAll();
-		req.setAttribute("listAllVideogames", listAllVideogames);
-		redirect(req,resp);
-	}
-	
-	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listVideogamesCompany.jsp");
-		dispatcher.forward(req,resp);
-	}
-	
-	public VideogameService getService() {
-		return service;
-	}
+	private CompanyService service = new CompanyService();
 
-	public void setService(VideogameService service) {
-		this.service = service;
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+		List<Company> listAllCompany = service.listAll();
+		request.setAttribute("listAllCompany", listAllCompany);
+		redirect(request,resp);
+	}
+	
+	protected void redirect(HttpServletRequest request, HttpServletResponse resp) throws IOException, ServletException {
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ListVideoGameCompany.jsp");
+		dispatcher.forward(request,resp);
 	}
 
 }

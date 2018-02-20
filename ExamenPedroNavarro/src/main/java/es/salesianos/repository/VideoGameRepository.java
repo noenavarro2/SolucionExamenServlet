@@ -8,10 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.salesianos.model.Company;
 import es.salesianos.model.Console;
 import es.salesianos.model.VideoGame;
 
-public class VideoGamesRepository implements Repository<VideoGame> {
+public class VideoGameRepository implements Repository<VideoGame> {
 
 	@Override
 	public void insert(VideoGame videogame) {
@@ -22,7 +23,7 @@ public class VideoGamesRepository implements Repository<VideoGame> {
 			preparedStatement.setString(1, videogame.getTitle());
 			preparedStatement.setString(2, videogame.getRecommendedAge());
 			preparedStatement.setString(3, videogame.getLaunchDate());
-			preparedStatement.setString(4, videogame.getConsole());
+			preparedStatement.setInt(4, videogame.getCompany());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -39,7 +40,7 @@ public class VideoGamesRepository implements Repository<VideoGame> {
 		PreparedStatement preparedStatement = null;
 		try {
 			conn = connection.openConnection(JDBCURL);
-			preparedStatement = conn.prepareStatement("DELETE FROM Videogame WHERE title = ?");
+			preparedStatement = conn.prepareStatement("DELETE FROM Videogame WHERE id = ?");
 			preparedStatement.setString(1, videogame.getTitle());
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
@@ -52,7 +53,7 @@ public class VideoGamesRepository implements Repository<VideoGame> {
 
 	@Override
 	public List<VideoGame> listAll() {
-		List<VideoGame> videogames = new ArrayList<VideoGame>();
+		List<VideoGame> ListVideoGames = new ArrayList<VideoGame>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -65,8 +66,8 @@ public class VideoGamesRepository implements Repository<VideoGame> {
 				videogame.setTitle(resultSet.getString("title"));
 				videogame.setRecommendedAge(resultSet.getString("recommendedAge"));
 				videogame.setLaunchDate(resultSet.getString("launchDate"));
-				videogame.setConsole(resultSet.getString("console"));
-				videogames.add(videogame);
+				videogame.setCompany(resultSet.getInt("console"));
+				ListVideoGames.add(videogame);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,11 +77,11 @@ public class VideoGamesRepository implements Repository<VideoGame> {
 			connection.closeStatement(statement);
 			connection.closeConnection(conn);
 		}
-		return videogames;
+		return ListVideoGames;
 	}
 
-	public List<VideoGame> searchByConsole(Console console) {
-		List<VideoGame> listVideogames = new ArrayList<VideoGame>();
+	public List<VideoGame> searchByCompany(Company company) {
+		List<VideoGame> listVideoGames = new ArrayList<VideoGame>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -88,16 +89,16 @@ public class VideoGamesRepository implements Repository<VideoGame> {
 		try {
 			conn = connection.openConnection(JDBCURL);
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT + WHERE name = ?");
-			prepareStatement.setString(1, console.getName());
+			resultSet = statement.executeQuery("SELECT  * FROM VIDEOGAME WHERE company = ?");
+			prepareStatement.setString(1, company + "");
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
-				VideoGame VideogameInDatabase = new VideoGame();
-				VideogameInDatabase.setTitle(resultSet.getString(1));
-				VideogameInDatabase.setRecommendedAge(resultSet.getString(2));
-				VideogameInDatabase.setLaunchDate(resultSet.getString(3));
-				VideogameInDatabase.setConsole(resultSet.getString(4));
-				listVideogames.add(VideogameInDatabase);
+				VideoGame Videogame = new VideoGame();
+				Videogame.setTitle(resultSet.getString(1));
+				Videogame.setRecommendedAge(resultSet.getString(2));
+				Videogame.setLaunchDate(resultSet.getString(3));
+				Videogame.setCompany(resultSet.getInt(4));
+				listVideoGames.add(Videogame);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -107,11 +108,11 @@ public class VideoGamesRepository implements Repository<VideoGame> {
 			connection.closeStatement(statement);
 			connection.closeConnection(conn);
 		}
-		return listVideogames;
+		return listVideoGames;
 	}
 
 	public List<VideoGame> searchByRecommendedAge(String recommendedAge) {
-		List<VideoGame> listVideogames = new ArrayList<VideoGame>();
+		List<VideoGame> listVideoGames = new ArrayList<VideoGame>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -122,12 +123,41 @@ public class VideoGamesRepository implements Repository<VideoGame> {
 			prepareStatement = conn.prepareStatement(recommendedAge);
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
-				VideoGame videogameInDatabase = new VideoGame();
-				videogameInDatabase.setTitle(resultSet.getString(1));
-				videogameInDatabase.setRecommendedAge(resultSet.getString(2));
-				videogameInDatabase.setLaunchDate(resultSet.getString(3));
-				videogameInDatabase.setConsole(resultSet.getString(4));
-				listVideogames.add(videogameInDatabase);
+				VideoGame videogame = new VideoGame();
+				videogame.setTitle(resultSet.getString(1));
+				videogame.setRecommendedAge(resultSet.getString(2));
+				videogame.setLaunchDate(resultSet.getString(3));
+				videogame.setCompany(resultSet.getInt(4));
+				listVideoGames.add(videogame);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			connection.closeResultSet(resultSet);
+			connection.closeStatement(statement);
+			connection.closeConnection(conn);
+		}
+		return listVideoGames;
+	}
+	public List<VideoGame> orderByLaunchDate() {
+		List<VideoGame> listVideogames = new ArrayList<VideoGame>();
+		Connection conn = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		PreparedStatement prepareStatement = null;
+		try {
+			conn = connection.openConnection(JDBCURL);
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM VIDEOGAME ORDER BY launchDate ASC");
+			resultSet = prepareStatement.executeQuery();
+			while(resultSet.next()){
+				VideoGame videoGame = new VideoGame();
+				videoGame.setTitle(resultSet.getString(1));
+				videoGame.setRecommendedAge(resultSet.getString(2));
+				videoGame.setLaunchDate(resultSet.getString(3));
+				videoGame.setCompany(resultSet.getInt(4));
+				listVideogames.add(videoGame);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

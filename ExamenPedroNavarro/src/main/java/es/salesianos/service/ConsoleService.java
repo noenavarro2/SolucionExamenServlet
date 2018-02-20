@@ -12,7 +12,7 @@ import es.salesianos.repository.*;
 
 public class ConsoleService implements Service<Console> {
 
-	private ConsolesRepository repository = new ConsolesRepository();
+	private ConsoleRepository repository = new ConsoleRepository();
 
 	@Override
 	public Console createObjectFromRequest(HttpServletRequest request) {
@@ -35,7 +35,19 @@ public class ConsoleService implements Service<Console> {
 		return repository.listAll();
 	}
 	
-	public List<Console> listAllByCompany(){
-		return repository.listAllByCompany();
+	public List<Console> listAllByCompany(int company){
+		return repository.listAllByCompany(company);
 	}
+	
+	public ConsoleRepository getRepository() {
+		return repository;
+	}
+	
+	public void setRepository(ConsoleRepository repository) {
+		this.repository = repository;
+	}
+	
+	public void createNewConsoleFromRequest(Console console) {
+		repository.insert(console);
+	}			
 }

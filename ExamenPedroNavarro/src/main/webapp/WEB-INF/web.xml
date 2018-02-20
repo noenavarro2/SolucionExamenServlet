@@ -5,22 +5,22 @@
 	version="3.1">
 
 	<servlet>
-		<servlet-name>ConsoleServlet</servlet-name>
-		<servlet-class>es.Salesianos.servlet.ListConsolesServlet</servlet-class>
+		<servlet-name>ConsoleRegisterServlet</servlet-name>
+		<servlet-class>es.Salesianos.servlet.ConsoleRegisterServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>ConsoleServlet</servlet-name>
+		<servlet-name>ConsoleRegisterServlet</servlet-name>
 		<url-pattern>console</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>VideoGamesServlet</servlet-name>
-		<servlet-class>es.Salesianos.servlet.ListVideoGamesServlet</servlet-class>
+		<servlet-name>VideoGamesRegisterServlet</servlet-name>
+		<servlet-class>es.Salesianos.servlet.VideoGamesRegisterServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>VideoGamesServlet</servlet-name>
+		<servlet-name>VideoGamesRegisterServlet</servlet-name>
 		<url-pattern>videogame</url-pattern>
 	</servlet-mapping>
 

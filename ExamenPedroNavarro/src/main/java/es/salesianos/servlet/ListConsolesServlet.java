@@ -25,15 +25,7 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	protected void redirect(HttpServletRequest request, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listConsole.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ConsoleList.jsp");
 		dispatcher.forward(request,resp);
-	}
-	
-	public ConsoleService getService() {
-		return service;
-	}
-
-	public void setService(ConsoleService service) {
-		this.service = service;
 	}
 }

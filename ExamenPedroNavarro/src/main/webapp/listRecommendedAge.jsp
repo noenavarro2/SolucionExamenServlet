@@ -33,7 +33,7 @@
 					<td><c:out value="${videoGames.recommendedAge}" /></td>
 					<td><c:out value="${videoGames.launchDate}" /></td>
 				</tr>
-			</c:forEach>
+		</c:forEach>
 	</table>
 </body>
 </html>

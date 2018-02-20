@@ -15,7 +15,6 @@
 <body>
 
 	<h2>VideoGames from Company</h2>
-
 	<form action="listVideoGameCompanies" method="post">
 		<input type="submit" value="See companies">
 	</form>
@@ -27,7 +26,7 @@
 
 
 	<form action="listVideogamesCompany" method="post">
-		<span>Select a company:</span> <select name="companyId">
+		<span>Select  company:</span> <select name="company">
 		</select> <br /> <input type="submit" value="Search">
 			<h4>List videoGames:</h4>
 
@@ -40,7 +39,7 @@
 						<td>ConsoleId</td>
 					</tr>
 				</thead>
-				<c:forEach items="${videogames}" var="consoles">
+				<c:forEach items="${videogames}" var="videogames">
 					<tr>
 						<td><c:out value="${videogame.title}" /></td>
 						<td><c:out value="${videogame.recommendedAge}" /></td>

@@ -30,6 +30,7 @@ public class ConnectionH2 implements ConnectionManager {
 				connection.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}
 	}
@@ -41,6 +42,7 @@ public class ConnectionH2 implements ConnectionManager {
 				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}
 	}
@@ -52,6 +54,7 @@ public class ConnectionH2 implements ConnectionManager {
 				preparedStatement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}
 	}
@@ -63,6 +66,7 @@ public class ConnectionH2 implements ConnectionManager {
 				resultSet.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
 		}	
 	}

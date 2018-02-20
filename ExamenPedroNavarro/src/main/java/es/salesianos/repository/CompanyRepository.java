@@ -13,7 +13,7 @@ import es.salesianos.connection.ConnectionH2;
 import es.salesianos.connection.ConnectionManager;
 import es.salesianos.model.Company;
 
-public class CompanysRepository implements Repository<Company>{
+public class CompanyRepository implements Repository<Company> {
 
 	@Override
 	public void insert(Company company) {
@@ -39,7 +39,7 @@ public class CompanysRepository implements Repository<Company>{
 		PreparedStatement preparedStatement = null;
 		try {
 			conn = connection.openConnection(JDBCURL);
-			preparedStatement = conn.prepareStatement("DELETE FROM Company WHERE name = ?");
+			preparedStatement = conn.prepareStatement("DELETE FROM Company WHERE id = ?");
 			preparedStatement.setString(1, company.getName());
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
@@ -52,7 +52,7 @@ public class CompanysRepository implements Repository<Company>{
 
 	@Override
 	public List<Company> listAll() {
-		List<Company> companies = new ArrayList<Company>();
+		List<Company> companiesList = new ArrayList<Company>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -61,10 +61,10 @@ public class CompanysRepository implements Repository<Company>{
 			statement = conn.createStatement();
 			resultSet = statement.executeQuery("SELECT * FROM Company");
 			while (resultSet.next()) {
-				Company comp = new Company();
-				comp.setName(resultSet.getString("name"));
-				comp.setDate(resultSet.getDate("date"));
-				companies.add(comp);
+				Company company = new Company();
+				company.setName(resultSet.getString("name"));
+				company.setDate(resultSet.getDate("date"));
+				companiesList.add(company);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,11 +74,7 @@ public class CompanysRepository implements Repository<Company>{
 			connection.closeStatement(statement);
 			connection.closeConnection(conn);
 		}
-		return companies;
+		return companiesList;
 	}
 
-	
-	
-
 }
-
