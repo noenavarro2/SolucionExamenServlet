@@ -53,7 +53,7 @@ public class ConsoleRepository implements Repository<Console> {
 
 	@Override
 	public List<Console> listAll() {
-		List<Console> consolesList = new ArrayList<Console>();
+		List<Console> consoleList = new ArrayList<Console>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -65,7 +65,7 @@ public class ConsoleRepository implements Repository<Console> {
 				Console console = new Console();
 				console.setName(resultSet.getString(1));
 				console.setCompany(resultSet.getInt(2));
-				consolesList.add(console);
+				consoleList.add(console);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,11 +75,11 @@ public class ConsoleRepository implements Repository<Console> {
 			connection.closeStatement(statement);
 			connection.closeConnection(conn);
 		}
-		return consolesList;
+		return consoleList;
 	}
 
 	public List<Console> listAllByCompany(int company) {
-		List<Console> consolesList = new ArrayList<Console>();
+		List<Console> consoleList = new ArrayList<Console>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -91,7 +91,7 @@ public class ConsoleRepository implements Repository<Console> {
 				Console actualConsole = new Console();
 				actualConsole.setName(resultSet.getString(1));
 				actualConsole.setCompany(resultSet.getInt(2));
-				consolesList.add(actualConsole);
+				consoleList.add(actualConsole);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,7 +100,7 @@ public class ConsoleRepository implements Repository<Console> {
 			connection.closeResultSet(resultSet);
 			connection.closeConnection(conn);
 		}
-		return consolesList;
+		return consoleList;
 	}
 
 }
