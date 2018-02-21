@@ -19,8 +19,8 @@
 	</form>
 	<br />
 	<%
-		List<Company> Listcompany = (List<Company>) request.getAttribute("listAllCompany");
-		pageContext.setAttribute("companies", Listcompany);
+		List<Company> listcompany = (List<Company>) request.getAttribute("listAllCompany");
+		pageContext.setAttribute("listcompany", listcompany);
 	%>
 
 
