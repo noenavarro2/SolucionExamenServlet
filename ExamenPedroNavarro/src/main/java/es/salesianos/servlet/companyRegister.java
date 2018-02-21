@@ -20,8 +20,8 @@ public class CompanyRegister extends HttpServlet{
 		service.createNewCompanyFromRequest(company);
 		redirect(request,resp);
 	}
-	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	protected void redirect(HttpServletRequest request, HttpServletResponse resp) throws IOException, ServletException {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CompanyRegister.jsp");
-		dispatcher.forward(req, resp);
+		dispatcher.forward(request, resp);
 	}
 }
