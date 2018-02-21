@@ -7,7 +7,7 @@ import es.salesianos.model.VideoGame;
 public class VideoGameAssembler {
 	
 	public static VideoGame assembleObjectFrom(HttpServletRequest request) {
-		VideoGame videogame= new VideoGame();
+		VideoGame videogame = new VideoGame();
 		videogame.setTitle(request.getParameter("title"));
 		videogame.setRecommendedAge(request.getParameter("recommendedAge"));
 		videogame.setLaunchDate(request.getParameter("launchDate"));

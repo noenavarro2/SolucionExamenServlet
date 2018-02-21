@@ -45,6 +45,7 @@ public class VideoGameRepository implements Repository<VideoGame> {
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		} finally {
 			connection.closePreparedStatement(preparedStatement);
 			connection.closeConnection(conn);

@@ -40,7 +40,6 @@ public class VideoGame {
 	public void setCompany(int company) {
 		this.company = company;
 	}
-	
 		
 }
 

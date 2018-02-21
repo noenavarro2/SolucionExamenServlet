@@ -55,8 +55,5 @@ public class VideogameService implements Service<VideoGame> {
 	
 	public void createNewVideoGameFromRequest(VideoGame VideoGame) {
 		repository.insert(VideoGame);
-}
-
-	
-	
+	}
 }

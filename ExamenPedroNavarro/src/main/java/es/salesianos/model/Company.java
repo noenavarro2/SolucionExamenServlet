@@ -7,7 +7,6 @@ public class Company {
 	private String name;
 	private Date date;
 	
-
 	public String getName() {
 		return name;
 	}
@@ -22,9 +21,5 @@ public class Company {
 	
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	
-		
-	
+	}	
 }

@@ -10,7 +10,7 @@ import es.salesianos.model.Console;
 public class CompanyAssembler {
 
 	public static Company assembleObjectFrom(HttpServletRequest request) {
-		Company  company  = new Company ();
+		Company company = new Company ();
 		company.setName(request.getParameter("name"));
 		company.setDate(Date.valueOf(request.getParameter("date")));
 		return company;
