@@ -1,9 +1,7 @@
 package es.salesianos.assembler;
 
 import java.sql.Date;
-
 import javax.servlet.http.HttpServletRequest;
-
 import es.salesianos.model.Company;
 import es.salesianos.model.Console;
 
