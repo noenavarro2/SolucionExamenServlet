@@ -2,31 +2,28 @@ package es.salesianos.servlet;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import es.salesianos.service.VideogameService;
+import es.salesianos.service.ConsoleService;
 import es.salesianos.model.Console;
-import es.salesianos.model.VideoGame;
 
-public class ListVideoGameMarkServlet extends HttpServlet {
 
-	private VideogameService service = new VideogameService();
-	private static final long serialVersionUID = 1L;
+public class ConsolesMarkServletList extends HttpServlet {
+
+	private ConsoleService service = new ConsoleService();
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<VideoGame> listAllVideoGames = service.listAll();
-		request.setAttribute("listAllVideoGames", listAllVideoGames);
+		List<Console> listAllConsole = service.listAll();
+		request.setAttribute("listAllConsole", listAllConsole);
 		redirect(request,response);
 	}
 	
 	protected void redirect(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/VideoGameList.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ConsoleList.jsp");
 		dispatcher.forward(request,response);
 	}
 }

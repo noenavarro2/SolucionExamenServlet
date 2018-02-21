@@ -8,10 +8,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>VideoGames</title>
+<title>VideoGames order by release date</title>
 </head>
 <body>
-	<form action="OrderByReleaseDate" method="post">
+	<form action="orderByReleaseDate" method="post">
 		<input type="submit" value="order list by release date">
 	</form>
 	<form action="dataGames" method="post">
@@ -19,8 +19,8 @@
 			<thead>
 				<tr>
 					<td>Title</td>
-					<td>remomendedAge</td>
-					<td>launchDate</td>
+					<td>Remomended age</td>
+					<td>Launch date</td>
 				</tr>
 			</thead>
 			<c:forEach var="videogames" items="${listAllVideoGame}">

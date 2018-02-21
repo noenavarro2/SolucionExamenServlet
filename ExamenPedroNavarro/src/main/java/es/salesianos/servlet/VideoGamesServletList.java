@@ -7,25 +7,25 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import es.salesianos.model.Console;
-import es.salesianos.service.ConsoleService;
+import es.salesianos.model.VideoGame;
+import es.salesianos.service.VideogameService;
 
 
-public class ListConsolesServlet extends HttpServlet {
+public class VideoGamesServletList extends HttpServlet {
 
-private static final long serialVersionUID = 1L;
-	
-	private ConsoleService service = new ConsoleService();
+	private static final long serialVersionUID = 1L;
+	private VideogameService service = new VideogameService();
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-		List<Console> listAllConsoles = service.listAll();
-		request.setAttribute("listAllConsoles", listAllConsoles);
+		List<VideoGame> listAllVideogame = service.listAll();
+		request.setAttribute("listAllVideogame", listAllVideogame);
 		redirect(request,resp);
 	}
 	
 	protected void redirect(HttpServletRequest request, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ConsoleList.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/VideoGameList.jsp");
 		dispatcher.forward(request,resp);
 	}
+
 }

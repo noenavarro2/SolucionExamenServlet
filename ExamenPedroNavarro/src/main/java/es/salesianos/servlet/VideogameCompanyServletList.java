@@ -15,7 +15,7 @@ import es.salesianos.model.VideoGame;
 import es.salesianos.service.CompanyService;
 import es.salesianos.service.VideogameService;
 
-public class ListVideogamesCompanyServlet extends HttpServlet {
+public class VideogameCompanyServletList extends HttpServlet {
 
 	private CompanyService service = new CompanyService();
 

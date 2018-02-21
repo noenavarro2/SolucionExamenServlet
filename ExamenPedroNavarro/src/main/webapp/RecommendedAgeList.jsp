@@ -10,21 +10,18 @@
 <title>List recommended age</title>
 </head>
 <body>
-
 	<h2>VIDEOGAMES</h2>
-
 	<%
-		List<VideoGame> videoGames = (List<VideoGame>) request.getAttribute("listAllVideogames");
-		pageContext.setAttribute("videogames", videoGames);
+		List<VideoGame> ListvideoGame = (List<VideoGame>) request.getAttribute("listAllVideogame");
+		pageContext.setAttribute("ListvideoGame", ListvideoGame);
 	%>
-	
-	<h4> List videogames: </h4>
+	<h4> List videogames</h4>
 	<table border="1">
 		<thead>
 			<tr>
 				<td>Name</td>
 				<td>Recomended age</td>
-				<td>Release date</td>
+				<td>Launch date</td>
 			</tr>
 		</thead>
 		<c:forEach items="${videoGames}" var="videoGames">

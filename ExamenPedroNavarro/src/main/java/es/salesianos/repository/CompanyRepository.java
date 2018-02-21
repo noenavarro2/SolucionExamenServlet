@@ -39,7 +39,7 @@ public class CompanyRepository implements Repository<Company> {
 		PreparedStatement preparedStatement = null;
 		try {
 			conn = connection.openConnection(JDBCURL);
-			preparedStatement = conn.prepareStatement("DELETE FROM Company WHERE id = ?");
+			preparedStatement = conn.prepareStatement("DELETE FROM Company WHERE name = ?");
 			preparedStatement.setString(1, company.getName());
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
@@ -52,7 +52,7 @@ public class CompanyRepository implements Repository<Company> {
 
 	@Override
 	public List<Company> listAll() {
-		List<Company> companiesList = new ArrayList<Company>();
+		List<Company> companyList = new ArrayList<Company>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -64,7 +64,7 @@ public class CompanyRepository implements Repository<Company> {
 				Company company = new Company();
 				company.setName(resultSet.getString("name"));
 				company.setDate(resultSet.getDate("date"));
-				companiesList.add(company);
+				companyList.add(company);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,7 +74,7 @@ public class CompanyRepository implements Repository<Company> {
 			connection.closeStatement(statement);
 			connection.closeConnection(conn);
 		}
-		return companiesList;
+		return companyList;
 	}
 
 }

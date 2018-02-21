@@ -13,15 +13,14 @@
 <title>List VideoGames from Company</title>
 </head>
 <body>
-
 	<h2>VideoGames from Company</h2>
 	<form action="listVideoGameCompanies" method="post">
 		<input type="submit" value="See companies">
 	</form>
 	<br />
 	<%
-		List<Company> companies = (List<Company>) request.getAttribute("listAllCompanies");
-		pageContext.setAttribute("companies", companies);
+		List<Company> Listcompany = (List<Company>) request.getAttribute("listAllCompany");
+		pageContext.setAttribute("companies", Listcompany);
 	%>
 
 
@@ -35,8 +34,8 @@
 					<tr>
 						<td>Name</td>
 						<td>Recomended age</td>
-						<td>LaunchDate</td>
-						<td>ConsoleId</td>
+						<td>Launch date</td>
+						<td>Console</td>
 					</tr>
 				</thead>
 				<c:forEach items="${videogames}" var="videogames">

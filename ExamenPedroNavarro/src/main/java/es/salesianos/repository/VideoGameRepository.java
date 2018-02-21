@@ -53,7 +53,7 @@ public class VideoGameRepository implements Repository<VideoGame> {
 
 	@Override
 	public List<VideoGame> listAll() {
-		List<VideoGame> ListVideoGames = new ArrayList<VideoGame>();
+		List<VideoGame> listVideoGame = new ArrayList<VideoGame>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -67,7 +67,7 @@ public class VideoGameRepository implements Repository<VideoGame> {
 				videogame.setRecommendedAge(resultSet.getString("recommendedAge"));
 				videogame.setLaunchDate(resultSet.getString("launchDate"));
 				videogame.setCompany(resultSet.getInt("console"));
-				ListVideoGames.add(videogame);
+				listVideoGame.add(videogame);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -77,11 +77,11 @@ public class VideoGameRepository implements Repository<VideoGame> {
 			connection.closeStatement(statement);
 			connection.closeConnection(conn);
 		}
-		return ListVideoGames;
+		return listVideoGame;
 	}
 
 	public List<VideoGame> searchByCompany(Company company) {
-		List<VideoGame> listVideoGames = new ArrayList<VideoGame>();
+		List<VideoGame> listVideoGame = new ArrayList<VideoGame>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -98,7 +98,7 @@ public class VideoGameRepository implements Repository<VideoGame> {
 				Videogame.setRecommendedAge(resultSet.getString(2));
 				Videogame.setLaunchDate(resultSet.getString(3));
 				Videogame.setCompany(resultSet.getInt(4));
-				listVideoGames.add(Videogame);
+				listVideoGame.add(Videogame);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -108,11 +108,11 @@ public class VideoGameRepository implements Repository<VideoGame> {
 			connection.closeStatement(statement);
 			connection.closeConnection(conn);
 		}
-		return listVideoGames;
+		return listVideoGame;
 	}
 
 	public List<VideoGame> searchByRecommendedAge(String recommendedAge) {
-		List<VideoGame> listVideoGames = new ArrayList<VideoGame>();
+		List<VideoGame> listVideoGame = new ArrayList<VideoGame>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -128,7 +128,7 @@ public class VideoGameRepository implements Repository<VideoGame> {
 				videogame.setRecommendedAge(resultSet.getString(2));
 				videogame.setLaunchDate(resultSet.getString(3));
 				videogame.setCompany(resultSet.getInt(4));
-				listVideoGames.add(videogame);
+				listVideoGame.add(videogame);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -138,10 +138,10 @@ public class VideoGameRepository implements Repository<VideoGame> {
 			connection.closeStatement(statement);
 			connection.closeConnection(conn);
 		}
-		return listVideoGames;
+		return listVideoGame;
 	}
 	public List<VideoGame> orderByLaunchDate() {
-		List<VideoGame> listVideogames = new ArrayList<VideoGame>();
+		List<VideoGame> listVideogame = new ArrayList<VideoGame>();
 		Connection conn = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -157,7 +157,7 @@ public class VideoGameRepository implements Repository<VideoGame> {
 				videoGame.setRecommendedAge(resultSet.getString(2));
 				videoGame.setLaunchDate(resultSet.getString(3));
 				videoGame.setCompany(resultSet.getInt(4));
-				listVideogames.add(videoGame);
+				listVideogame.add(videoGame);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -167,6 +167,6 @@ public class VideoGameRepository implements Repository<VideoGame> {
 			connection.closeStatement(statement);
 			connection.closeConnection(conn);
 		}
-		return listVideogames;
+		return listVideogame;
 	}
 }

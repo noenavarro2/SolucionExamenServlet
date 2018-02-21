@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import es.salesianos.model.*;
 import es.salesianos.service.CompanyService;
 
-public class companyRegister extends HttpServlet{
+public class CompanyRegister extends HttpServlet{
 	
 	private CompanyService service = new CompanyService();
 	private static final long serialVersionUID = 1L;

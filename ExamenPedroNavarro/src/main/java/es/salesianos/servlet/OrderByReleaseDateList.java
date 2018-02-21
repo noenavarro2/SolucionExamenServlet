@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import es.salesianos.model.*;
 import es.salesianos.service.VideogameService;
 
-public class ListOrderByReleaseDate extends HttpServlet {
+public class OrderByReleaseDateList extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private VideogameService service = new VideogameService();

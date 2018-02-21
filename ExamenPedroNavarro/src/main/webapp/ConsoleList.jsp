@@ -14,8 +14,8 @@
 </head>
 <body>
 	<%
-		List<Console> consoles = (List<Console>) request.getAttribute("listAllConsoles");
-		pageContext.setAttribute("consoles", consoles);
+		List<Console> ListConsole = (List<Console>) request.getAttribute("listAllConsole");
+		pageContext.setAttribute("ListConsole", ListConsole);
 	%>
 
 	<form action="dataConsoles" method="post">
@@ -23,8 +23,8 @@
 		<table border="1">
 			<thead>
 				<tr>
-					<td>Name</td>
-					<td>Company</td>
+					<td>name</td>
+					<td>company</td>
 				</tr>
 			</thead>
 			<c:forEach items="${consoles}" var="consoles">

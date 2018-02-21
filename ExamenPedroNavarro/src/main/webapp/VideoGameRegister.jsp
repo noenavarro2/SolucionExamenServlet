@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Video Game Register</title>
+<title>VideoGame Register</title>
 </head>
 <body>
 	<form action="videogame" method="post">
-		<span>title:</span> 
+		<span>Title:</span> 
 		<input type="text" name="title"/> <br/>
-		<span>recommendedAge:</span> 
+		<span>Recommended age:</span> 
 		<input type="text" name="recommendedAge"/><br/>
-		<span>launchDate:</span> 
+		<span>Launch date:</span> 
 		<input type="text" name="launchDate"/><br/>
 		<input type="submit"/>
 	</form>
