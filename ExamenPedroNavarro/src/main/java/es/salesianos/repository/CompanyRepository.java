@@ -44,6 +44,7 @@ public class CompanyRepository implements Repository<Company> {
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		} finally {
 			connection.closePreparedStatement(preparedStatement);
 			connection.closeConnection(conn);
