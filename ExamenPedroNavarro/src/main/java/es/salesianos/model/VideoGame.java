@@ -13,7 +13,6 @@ public class VideoGame {
 	}
 	
 	public void setTitle(String title) {
-		
 		this.title = title;
 	}
 	
