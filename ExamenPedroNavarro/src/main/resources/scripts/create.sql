@@ -1,16 +1,16 @@
-create table IF NOT EXISTS consolas(
+create table IF NOT EXISTS consoles(
 	ID varchar(25) PRIMARY KEY,
-	nombre varchar(25),
-	empresa varchar(25)
+	name varchar(25),
+	company varchar(25)
 );
-create table IF NOT EXISTS empresas(
+create table IF NOT EXISTS companies(
 	ID varchar(25) PRIMARY KEY,
-	nombre varchar(25),
-	fechaCreacion date
+	name varchar(25),
+	dateLaunch date
 );
-create table IF NOT EXISTS videojuegos(
+create table IF NOT EXISTS videogames(
 	ID varchar(25) PRIMARY KEY,
-	titulo varchar(25),
-	edad varchar(25),
-	fechaLanzamiento date
+	title varchar(25),
+	date varchar(25),
+	launchDate date
 );
