@@ -14,8 +14,8 @@
 </head>
 <body>
 	<%
-		List<Console> ListConsole = (List<Console>) request.getAttribute("listAllConsole");
-		pageContext.setAttribute("ListConsole", ListConsole);
+		List<Console> listConsole = (List<Console>) request.getAttribute("listAllConsole");
+		pageContext.setAttribute("listConsole", listConsole);
 	%>
 
 	<form action="dataConsoles" method="post">
