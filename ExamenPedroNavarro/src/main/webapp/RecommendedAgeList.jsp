@@ -12,8 +12,8 @@
 <body>
 	<h2>VIDEOGAMES</h2>
 	<%
-		List<VideoGame> ListvideoGame = (List<VideoGame>) request.getAttribute("listAllVideogame");
-		pageContext.setAttribute("ListvideoGame", ListvideoGame);
+		List<VideoGame> listvideoGame = (List<VideoGame>) request.getAttribute("listAllVideogame");
+		pageContext.setAttribute("listvideoGame", listvideoGame);
 	%>
 	<h4> List videogames</h4>
 	<table border="1">
