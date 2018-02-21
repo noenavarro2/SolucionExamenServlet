@@ -44,6 +44,7 @@ public class ConsoleRepository implements Repository<Console> {
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new RuntimeException(e);
 		} finally {
 			connection.closePreparedStatement(preparedStatement);
 			connection.closeConnection(conn);
