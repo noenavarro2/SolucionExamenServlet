@@ -41,6 +41,7 @@ public class VideoGameRepository implements RepositoryInterface<VideoGame> {
 		params.addValue("console", videogame.getCompany());
 		nameParameterdJdbcTemplate.update(sql, params);
 	}
+	
 	@Override
 	public void delete(VideoGame videogame) {
 		log.debug("tablename: " +videogame.getTitle());
