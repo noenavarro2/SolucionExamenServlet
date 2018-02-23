@@ -11,7 +11,7 @@
 	<form action="console" method="post">
 		<span>Name:</span> 
 		<input type="text" name="name"/> <br/>
-		<span>Nompany:</span> 
+		<span>Company:</span> 
 		<input type="text" name="codCompany"/><br/>
 		<input type="submit"/>
 	</form>
