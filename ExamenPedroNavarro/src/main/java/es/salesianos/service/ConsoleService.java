@@ -1,0 +1,43 @@
+package es.salesianos.service;
+
+import java.util.List;
+import org.springframework.stereotype.Service;
+import es.salesianos.model.Console;
+import es.salesianos.repository.ConsoleRepository;
+
+@Service
+public class ConsoleService implements ServiceMethods<Console> {
+
+	private ConsoleRepository repository = new ConsoleRepository();
+
+	@Override
+	public void insert(Console console) {
+		repository.insert(console);	
+	}
+
+	@Override
+	public void delete(Console console) {
+		repository.delete(console);
+	}
+
+	@Override
+	public List<Console> listAll() {
+		return repository.listAll();
+	}
+	
+	public List<Console> listAllByCompany(String string){
+		return repository.listAllByCompany(string);
+	}
+	
+	public ConsoleRepository getRepository() {
+		return repository;
+	}
+	
+	public void setRepository(ConsoleRepository repository) {
+		this.repository = repository;
+	}
+	
+	public void createNewConsoleFromRequest(Console console) {
+		repository.insert(console);
+	}			
+}
