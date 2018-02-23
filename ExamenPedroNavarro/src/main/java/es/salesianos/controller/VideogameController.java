@@ -20,7 +20,6 @@ private static Logger log = LogManager.getLogger(CompanyController.class);
 	@Autowired
 	private VideogameService service;
 	
-
 	@PostMapping("/VideogameRegister")
 	public ModelAndView saveVideogame(@ModelAttribute VideoGame videogame) {
 		log.debug("register videogame post ");
