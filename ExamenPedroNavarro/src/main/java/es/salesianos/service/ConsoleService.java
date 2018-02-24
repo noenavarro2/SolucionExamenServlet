@@ -8,7 +8,8 @@ import es.salesianos.repository.ConsoleRepository;
 @Service
 public class ConsoleService implements ServiceMethods<Console> {
 
-	private ConsoleRepository repository = new ConsoleRepository();
+	@Autowired
+	private ConsoleRepository repository;
 
 	@Override
 	public void insert(Console console) {
