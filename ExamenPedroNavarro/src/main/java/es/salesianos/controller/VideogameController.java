@@ -47,8 +47,8 @@ private static Logger log = LogManager.getLogger(CompanyController.class);
 	public ModelAndView listRecommendedAge() {
 		log.debug("list By recommended Age get ");
 		ModelAndView modelAndView = new ModelAndView("RecommendedAgeList");
-	    modelAndView.addObject("age");
-	    return modelAndView;
+	   	modelAndView.addObject("age");
+	    	return modelAndView;
 	}
 	
 	@PostMapping("/listRecommendedAge")
