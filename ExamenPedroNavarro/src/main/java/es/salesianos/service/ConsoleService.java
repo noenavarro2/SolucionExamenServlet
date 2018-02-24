@@ -1,6 +1,8 @@
 package es.salesianos.service;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import es.salesianos.model.Console;
 import es.salesianos.repository.ConsoleRepository;
@@ -8,7 +10,8 @@ import es.salesianos.repository.ConsoleRepository;
 @Service
 public class ConsoleService implements ServiceMethods<Console> {
 
-	private ConsoleRepository repository = new ConsoleRepository();
+	@Autowired
+	private ConsoleRepository repository;
 
 	@Override
 	public void insert(Console console) {

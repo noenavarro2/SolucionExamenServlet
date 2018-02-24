@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import es.salesianos.model.Company;
+import es.salesianos.model.User;
 import es.salesianos.model.VideoGame;
 
 @Repository
@@ -61,7 +62,7 @@ public class VideoGameRepository implements RepositoryInterface<VideoGame> {
 		log.debug("ejecutando la consulta: " + sql);
 		company = null;
 		try {
-			company = (Company) jdbctemplate.queryForList(sql,beanPropertyRowMapper(sql), company.getName());
+			company = jdbctemplate.queryForObject(sql, new BeanPropertyRowMapper<Company>(Company.class), company);
 		} catch (EmptyResultDataAccessException e) {
 			log.error("error", e);
 		}
@@ -71,8 +72,8 @@ public class VideoGameRepository implements RepositoryInterface<VideoGame> {
 	public Optional<VideoGame> searchByRecommendedAge(VideoGame videogame) {
 		String sql = "SELECT  * FROM VIDEOGAME WHERE" + videogame.getRecommendedAge() +"= ?";
 		log.debug("ejecutando la consulta: " + sql);
-		try {
-			videogame = (VideoGame) jdbctemplate.queryForList(sql,beanPropertyRowMapper(sql), videogame.getRecommendedAge());
+		try {											
+			videogame = jdbctemplate.queryForObject(sql, new BeanPropertyRowMapper<VideoGame>(VideoGame.class), videogame.getRecommendedAge());
 		} catch (EmptyResultDataAccessException e) {
 			log.error("error", e);
 		}
