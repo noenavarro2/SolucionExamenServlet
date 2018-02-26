@@ -28,8 +28,8 @@ public class ConsoleService implements ServiceMethods<Console> {
 		return repository.listAll();
 	}
 	
-	public List<Console> listAllByCompany(String string){
-		return repository.listAllByCompany(string);
+	public List<Console> listAllByCompany(String company){
+		return repository.listAllByCompany(company);
 	}
 	
 	public ConsoleRepository getRepository() {
