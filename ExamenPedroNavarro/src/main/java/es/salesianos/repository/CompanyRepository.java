@@ -24,7 +24,7 @@ public class CompanyRepository implements RepositoryInterface<Company> {
 
 	@Override
 	public void insert(Company company) {
-		log.debug("el log funciona");
+		log.debug("insert company");
 		String sql = "INSERT INTO Company (name,date)" + "VALUES (?, ?)";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("name", company.getName());

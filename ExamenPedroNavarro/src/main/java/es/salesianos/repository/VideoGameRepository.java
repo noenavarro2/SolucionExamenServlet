@@ -32,7 +32,7 @@ public class VideoGameRepository implements RepositoryInterface<VideoGame> {
 
 	@Override
 	public void insert(VideoGame videogame) {
-		log.debug("el log funciona");
+		log.debug("insert videogame");
 		String sql = "INSERT INTO Videogame (name,recomendedAge,launchDate,company)" + "VALUES (?, ?, ?, ?)";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("name", videogame.getTitle());

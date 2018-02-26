@@ -24,7 +24,7 @@ public class ConsoleRepository implements RepositoryInterface<Console> {
 
 	@Override
 	public void insert(Console console) {
-		log.debug("el log funciona");
+		log.debug("insert console ");
 		String sql = "INSERT INTO CONSOLE (name,company)" + "VALUES (?, ?)";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("name", console.getName());
