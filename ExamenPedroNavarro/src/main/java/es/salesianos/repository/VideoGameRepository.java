@@ -62,11 +62,7 @@ public class VideoGameRepository implements RepositoryInterface<VideoGame> {
 		log.debug("ejecutando la consulta: " + sql);
 		company = null;
 		try {
-<<<<<<< HEAD
 			company = jdbctemplate.queryForObject(sql, new BeanPropertyRowMapper<Company>(Company.class), company);
-=======
-			company = jdbctemplate.queryForList<Company>(sql,beanPropertyRowMapper(sql), company.getName());
->>>>>>> origin/master
 		} catch (EmptyResultDataAccessException e) {
 			log.error("error", e);
 		}
