@@ -59,7 +59,7 @@ public class VideoGameRepository implements RepositoryInterface<VideoGame> {
 	
 	public Optional<Company> searchByCompany(Company company) {
 		String sql = "SELECT  * FROM VIDEOGAME WHERE company = ?";
-		log.debug("ejecutando la consulta: " + sql);
+		log.debug("query: " + sql);
 		company = null;
 		try {
 			company = jdbctemplate.queryForObject(sql, new BeanPropertyRowMapper<Company>(Company.class), company);
