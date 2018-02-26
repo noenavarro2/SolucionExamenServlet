@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import es.salesianos.model.Company;
-import es.salesianos.model.User;
 import es.salesianos.model.VideoGame;
 
 @Repository
@@ -26,10 +25,10 @@ public class VideoGameRepository implements RepositoryInterface<VideoGame> {
 	private static Logger log = LogManager.getLogger(CompanyRepository.class);
 	
 	@Autowired
-	public JdbcTemplate jdbctemplate;
+	private JdbcTemplate jdbctemplate;
 
 	@Autowired
-	public NamedParameterJdbcTemplate nameParameterdJdbcTemplate;
+	private NamedParameterJdbcTemplate nameParameterdJdbcTemplate;
 
 	@Override
 	public void insert(VideoGame videogame) {
@@ -42,6 +41,7 @@ public class VideoGameRepository implements RepositoryInterface<VideoGame> {
 		params.addValue("console", videogame.getCompany());
 		nameParameterdJdbcTemplate.update(sql, params);
 	}
+	
 	@Override
 	public void delete(VideoGame videogame) {
 		log.debug("tablename: " +videogame.getTitle());
@@ -84,5 +84,21 @@ public class VideoGameRepository implements RepositoryInterface<VideoGame> {
 		String sql = "SELECT * FROM Videogame ORDER BY launchDate";
 		List<VideoGame> videoGameList = beanPropertyRowMapper(sql);
 		return videoGameList;
+	}
+	
+	public JdbcTemplate getJdbctemplate() {
+		return jdbctemplate;
+	}
+
+	public void setJdbctemplate(JdbcTemplate jdbctemplate) {
+		this.jdbctemplate = jdbctemplate;
+	}
+
+	public NamedParameterJdbcTemplate getNameParameterdJdbcTemplate() {
+		return nameParameterdJdbcTemplate;
+	}
+
+	public void setNameParameterdJdbcTemplate(NamedParameterJdbcTemplate nameParameterdJdbcTemplate) {
+		this.nameParameterdJdbcTemplate = nameParameterdJdbcTemplate;
 	}
 }

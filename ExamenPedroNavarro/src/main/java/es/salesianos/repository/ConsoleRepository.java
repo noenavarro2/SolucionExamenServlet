@@ -17,10 +17,10 @@ public class ConsoleRepository implements RepositoryInterface<Console> {
 	private static Logger log = LogManager.getLogger(CompanyRepository.class);
 	
 	@Autowired
-	public JdbcTemplate jdbctemplate;
+	private JdbcTemplate jdbctemplate;
 
 	@Autowired
-	public NamedParameterJdbcTemplate nameParameterdJdbcTemplate;
+	private NamedParameterJdbcTemplate nameParameterdJdbcTemplate;
 
 	@Override
 	public void insert(Console console) {
@@ -55,5 +55,21 @@ public class ConsoleRepository implements RepositoryInterface<Console> {
 	
 	private List beanPropertyRowMapper(String sql) {
 		return jdbctemplate.query(sql, new BeanPropertyRowMapper(Console.class));
+	}
+
+	public JdbcTemplate getJdbctemplate() {
+		return jdbctemplate;
+	}
+
+	public void setJdbctemplate(JdbcTemplate jdbctemplate) {
+		this.jdbctemplate = jdbctemplate;
+	}
+
+	public NamedParameterJdbcTemplate getNameParameterdJdbcTemplate() {
+		return nameParameterdJdbcTemplate;
+	}
+
+	public void setNameParameterdJdbcTemplate(NamedParameterJdbcTemplate nameParameterdJdbcTemplate) {
+		this.nameParameterdJdbcTemplate = nameParameterdJdbcTemplate;
 	}
 }

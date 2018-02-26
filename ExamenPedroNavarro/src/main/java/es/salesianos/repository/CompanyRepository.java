@@ -31,6 +31,7 @@ public class CompanyRepository implements RepositoryInterface<Company> {
 		params.addValue("date", company.getDate());
 		nameParameterdJdbcTemplate.update(sql, params);
 	}
+	
 	@Override
 	public void delete(Company company) {
 		log.debug("tablename: " + company.getName());
@@ -44,5 +45,21 @@ public class CompanyRepository implements RepositoryInterface<Company> {
 		String sql = "SELECT * FROM COMPANY";
 		List<Company> companyList = jdbctemplate.query(sql, new BeanPropertyRowMapper(Company.class));
 		return companyList;
+	}
+	
+	public JdbcTemplate getJdbctemplate() {
+		return jdbctemplate;
+	}
+
+	public void setJdbctemplate(JdbcTemplate jdbctemplate) {
+		this.jdbctemplate = jdbctemplate;
+	}
+
+	public NamedParameterJdbcTemplate getNameParameterdJdbcTemplate() {
+		return nameParameterdJdbcTemplate;
+	}
+
+	public void setNameParameterdJdbcTemplate(NamedParameterJdbcTemplate nameParameterdJdbcTemplate) {
+		this.nameParameterdJdbcTemplate = nameParameterdJdbcTemplate;
 	}
 }

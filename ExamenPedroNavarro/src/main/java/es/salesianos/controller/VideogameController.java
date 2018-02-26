@@ -14,19 +14,19 @@ import es.salesianos.service.VideogameService;
 
 @Controller
 public class VideogameController {
-
+	
 	private static Logger log = LogManager.getLogger(CompanyController.class);
-
+	
 	@Autowired
 	private VideogameService service;
-
+	
 	@PostMapping("/VideogameRegister")
 	public ModelAndView saveVideogame(@ModelAttribute VideoGame videogame) {
 		log.debug("register videogame post ");
 		service.insert(videogame);
 		return new ModelAndView("VideogameRegister", "command", new VideoGame());
 	}
-
+	
 	@GetMapping("/VideoGameList")
 	public ModelAndView listVideogame() {
 		log.debug("list videogame get ");
@@ -34,7 +34,7 @@ public class VideogameController {
 		modelAndView.addObject("listAllVideogames", service.listAll());
 		return modelAndView;
 	}
-
+	
 	@PostMapping("/VideogameCompanyList")
 	public ModelAndView listVideogamesCompany(@ModelAttribute Company company) {
 		log.debug("list videogame by company post ");
@@ -42,15 +42,15 @@ public class VideogameController {
 		modelAndView.addObject("listAllVideogames", service.listByCompany(company));
 		return modelAndView;
 	}
-
+	
 	@GetMapping("/RecommendedAgeList")
 	public ModelAndView listRecommendedAge() {
 		log.debug("list By recommended Age get ");
 		ModelAndView modelAndView = new ModelAndView("RecommendedAgeList");
-		modelAndView.addObject("age");
-		return modelAndView;
+	   	modelAndView.addObject("age");
+	    	return modelAndView;
 	}
-
+	
 	@PostMapping("/listRecommendedAge")
 	public ModelAndView listRecommendedAge(@ModelAttribute VideoGame recommendedAge) {
 		log.debug("recommended Age post ");

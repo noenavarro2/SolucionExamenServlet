@@ -20,8 +20,7 @@ public class ConsoleController {
 	private static Logger log = LogManager.getLogger(CompanyController.class);
 	
 	@Autowired
-	private ConsoleService service;
-	
+	private ConsoleService service;	
 
 	@PostMapping("/ConsoleRegister")
 	public ModelAndView registerConsole(@ModelAttribute Console console) {

@@ -13,7 +13,7 @@ public class Connection {
 	private static final String CONNECTION = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql'";
 	
 	@Autowired
-	DriverManagerDataSource dataSource;
+	private DriverManagerDataSource dataSource;
 	
 	@Bean
 	@Profile(value = "h2")
