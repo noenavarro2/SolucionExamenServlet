@@ -71,7 +71,7 @@ public class VideoGameRepository implements RepositoryInterface<VideoGame> {
 
 	public Optional<VideoGame> searchByRecommendedAge(VideoGame videogame) {
 		String sql = "SELECT  * FROM VIDEOGAME WHERE" + videogame.getRecommendedAge() +"= ?";
-		log.debug("ejecutando la consulta: " + sql);
+		log.debug("query: " + sql);
 		try {											
 			videogame = jdbctemplate.queryForObject(sql, new BeanPropertyRowMapper<VideoGame>(VideoGame.class), videogame.getRecommendedAge());
 		} catch (EmptyResultDataAccessException e) {
