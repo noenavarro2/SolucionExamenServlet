@@ -74,7 +74,6 @@ public class VideoGameRepository implements RepositoryInterface<VideoGame> {
 		log.debug("ejecutando la consulta: " + sql);
 		try {											
 			videogame = jdbctemplate.queryForObject(sql, new BeanPropertyRowMapper<VideoGame>(VideoGame.class), videogame.getRecommendedAge());
-
 		} catch (EmptyResultDataAccessException e) {
 			log.error("error", e);
 		}
